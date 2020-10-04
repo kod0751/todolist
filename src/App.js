@@ -11,17 +11,16 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-
 function App() {
   return (
-  <>
-    <GlobalStyle />
-    <TodoTemplate>
-      <TodoHead />
-      <TodoList />
-      <TodoCreate />
-    </TodoTemplate>
-  </>
+    <>
+      <GlobalStyle />
+      <TodoTemplate>
+        <TodoHead />
+        <TodoList />
+        <TodoCreate />
+      </TodoTemplate>
+    </>
   );
 }
 
