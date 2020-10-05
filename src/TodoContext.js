@@ -25,16 +25,16 @@ const initialTodos = [
 
 function todoReducer(state, action) {
   switch (action.type) {
-    case 'CRATE':
+    case 'CREATE':
       return state.concat(action.todo);
-    case 'Toggle':
+    case 'TOGGLE':
       return state.map(todo =>
         todo.id === action.id ? { ...todo, done: !todo.done } : todo,
       );
-    case 'Remove':
+    case 'REMOVE':
       return state.filter(todo => todo.id !== action.id);
     default:
-      throw new Error('Unhandled action type: ${action.type');
+      throw new Error(`Unhandled action type: ${action.type}`);
   }
 }
 
@@ -46,11 +46,13 @@ export function TodoProvider({ children }) {
   const [state, dispatch] = useReducer(todoReducer, initialTodos);
   const nextId = useRef(5);
   return (
-    <TodoStateContext value={state}>
-      <TodoDispatchContext value={dispatch}>
-        <TodoNextIdContext value={nextId}>{children}</TodoNextIdContext>
-      </TodoDispatchContext>
-    </TodoStateContext>
+    <TodoStateContext.Provider value={state}>
+      <TodoDispatchContext.Provider value={dispatch}>
+        <TodoNextIdContext.Provider value={nextId}>
+          {children}
+        </TodoNextIdContext.Provider>
+      </TodoDispatchContext.Provider>
+    </TodoStateContext.Provider>
   );
 }
 
